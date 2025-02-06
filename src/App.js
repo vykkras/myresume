@@ -17,7 +17,7 @@ function App() {
     const audio = new Audio("https://example.com/hacking-sound.mp3");
     audio.volume = 0.1;
     audio.addEventListener("canplaythrough", () => {
-      audio.play().catch((error) => console.error("Audio play failes: ", error));
+      audio.play().catch((error) => console.error("Audio play failed: ", error));
     })
     
     return () => clearInterval(interval);
@@ -31,7 +31,7 @@ function App() {
       setShowResume(true);
       setMessage("✅ Access Granted. Resume Unlocked.");
     } else if (command === "help") {
-      setMessage("💡 Try typing 'unlock resume' or 'access resume.txt' to proceed.");
+      setMessage("💡 Try typing 'unlock resume' or 'access resume.txt' to proceed, but please dont type secret.log :(.");
     } else if (command === "whoami") {
       setMessage("👤 You are a recruiter trying to access my credentials.");
     } else if (command === "ls") {
@@ -55,11 +55,11 @@ function App() {
       <MatrixEffect/> 
       
       <h1 className={`glowing-text ${glitch ? "glitch-text flicker" : ""}`}>
-        Welcome, Hacker
+        Welcome, recruiter. Use your kwnoledge to find my resume:
       </h1>
 
       <div className="terminal">
-        <p>Type a command to access resume:</p>
+        <p>Type a command to access resume: (ask for help, i guess)</p>
         
         {/* ✅ Input Field */}
         <input
@@ -88,12 +88,25 @@ function App() {
       </div>
 
       {/* ✅ Boring Button */}
-      <button onClick={() => setShowResume(true)} style={{ marginTop: "20px" }}>
-        I’m boring, just show me the resume 😒
-      </button>
-    </div>
-  );
-}
+      <button onClick={() => {
+        const confirmBoring = window.confirm("You agree then that you are not fun? 😒");
+        if(confirmBoring){
+          setShowResume(true);
+        }
+      }}
+      style={{marginTop: "20px"}}>I'm boring, just show me the resume 😕</button>
+
+      {(showResume || message) && (
+      <button onClick={() => {
+        setShowResume(false);
+        setMessage("");
+        setInput("");
+      }}
+      style={{marginTop: "20px", background: "green", color: "white", padding: "10px", border: "none", cursor: "pointer"}}
+      > Reset Page 🤖</button>
+    )}
+  </div>
+  )}
 
 export default App;
 

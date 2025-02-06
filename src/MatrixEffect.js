@@ -22,18 +22,18 @@ const MatrixEffect = () => {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
     const matrix = letters.split("");
 
-    const fontSize = 12;
+    const fontSize = 20;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
 
     const draw = () => {
       if (!ctx) return; // Prevent crashes if ctx is null
       
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; 
+      ctx.fillStyle = "rgba(0, 0, 0, 0.2)"; 
       ctx.fillRect(0, 0, canvas.width, canvas.height); // ✅ Fixed
 
       ctx.fillStyle = "#0F0";
-      ctx.shadowColor= "#0F0";
+      
       ctx.shadowBlur= 10;
       
 
